@@ -90,7 +90,12 @@ NSUInteger DeviceSystemMajorVersion() {
     
     _lowerValue = 0.0;
     _upperValue = 1.0;
-    
+
+    _lowerHandleHorizontalTouchPadding = 5.0;
+    _lowerHandleVerticalTouchPadding = 5.0;
+    _upperHandleHorizontalTouchPadding = 5.0;
+    _upperHandleVerticalTouchPadding = 5.0;
+
     _lowerMaximumValue = NAN;
     _upperMinimumValue = NAN;
     _upperHandleHidden = NO;
@@ -403,12 +408,10 @@ NSUInteger DeviceSystemMajorVersion() {
 - (CGRect)trackRect
 {
     CGRect retValue;
-    
-    UIImage* currentTrackImage = [self trackImageForCurrentValues];
-    
-    retValue.size = CGSizeMake(currentTrackImage.size.width, currentTrackImage.size.height);
-    
-    if(currentTrackImage.capInsets.top || currentTrackImage.capInsets.bottom)
+
+    retValue.size = CGSizeMake(_trackImage.size.width, _trackImage.size.height);
+
+    if(_trackImage.capInsets.top || _trackImage.capInsets.bottom)
     {
         retValue.size.height=self.bounds.size.height;
     }
@@ -538,16 +541,16 @@ NSUInteger DeviceSystemMajorVersion() {
 
     // Layout the lower handle
     self.lowerHandle.frame = [self thumbRectForValue:_lowerValue image:self.lowerHandleImageNormal];
-    self.lowerHandle.image = self.lowerHandleImageNormal;
-    self.lowerHandle.highlightedImage = self.lowerHandleImageHighlighted;
-    self.lowerHandle.hidden = self.lowerHandleHidden;
-    
+    self.lowerHandle.image = self.lowerHandleHidden ? nil : self.lowerHandleImageNormal;
+    self.lowerHandle.highlightedImage = self.lowerHandleHidden ? nil : self.lowerHandleImageHighlighted;
+    self.lowerHandle.userInteractionEnabled = !self.lowerHandleHidden;
+
     // Layoput the upper handle
     self.upperHandle.frame = [self thumbRectForValue:_upperValue image:self.upperHandleImageNormal];
-    self.upperHandle.image = self.upperHandleImageNormal;
-    self.upperHandle.highlightedImage = self.upperHandleImageHighlighted;
-    self.upperHandle.hidden= self.upperHandleHidden;
-    
+    self.upperHandle.image = self.upperHandleHidden ? nil : self.upperHandleImageNormal;
+    self.upperHandle.highlightedImage = self.upperHandleHidden ? nil : self.upperHandleImageHighlighted;
+    self.upperHandle.userInteractionEnabled = !self.upperHandleHidden;
+
 }
 
 - (CGSize)intrinsicContentSize
@@ -562,10 +565,10 @@ NSUInteger DeviceSystemMajorVersion() {
 
 // The handle size can be a little small, so i make it a little bigger
 // TODO: Do it the correct way. I think wwdc 2012 had a video on it...
-- (CGRect) touchRectForHandle:(UIImageView*) handleImageView
+- (CGRect)touchRectForHandle:(UIImageView *)handleImageView
 {
-    float xPadding = 5;
-    float yPadding = 5; //(self.bounds.size.height-touchRect.size.height)/2.0f
+    float xPadding = (handleImageView == _lowerHandle ? _lowerHandleHorizontalTouchPadding : _upperHandleHorizontalTouchPadding);
+    float yPadding = (handleImageView == _lowerHandle ? _lowerHandleVerticalTouchPadding : _upperHandleVerticalTouchPadding);
 
     // expands rect by xPadding in both x-directions, and by yPadding in both y-directions
     CGRect touchRect = CGRectInset(handleImageView.frame, -xPadding, -yPadding);;
