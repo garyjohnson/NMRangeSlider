@@ -50,10 +50,10 @@
 @property(assign, nonatomic) float upperMinimumValue;
 
 // default 5.0. Used to change the touch area for the handles
-@property (assign, nonatomic) BOOL lowerHandleHorizontalTouchPadding;
-@property (assign, nonatomic) BOOL lowerHandleVerticalTouchPadding;
-@property (assign, nonatomic) BOOL upperHandleHorizontalTouchPadding;
-@property (assign, nonatomic) BOOL upperHandleVerticalTouchPadding;
+@property (assign, nonatomic) float lowerHandleHorizontalTouchPadding;
+@property (assign, nonatomic) float lowerHandleVerticalTouchPadding;
+@property (assign, nonatomic) float upperHandleHorizontalTouchPadding;
+@property (assign, nonatomic) float upperHandleVerticalTouchPadding;
 
 @property (assign, nonatomic) BOOL lowerHandleHidden;
 @property (assign, nonatomic) BOOL upperHandleHidden;
