@@ -543,13 +543,13 @@ NSUInteger DeviceSystemMajorVersion() {
     self.lowerHandle.frame = [self thumbRectForValue:_lowerValue image:self.lowerHandleImageNormal];
     self.lowerHandle.image = self.lowerHandleHidden ? nil : self.lowerHandleImageNormal;
     self.lowerHandle.highlightedImage = self.lowerHandleHidden ? nil : self.lowerHandleImageHighlighted;
-    self.lowerHandle.userInteractionEnabled = !self.lowerHandleHidden;
+    self.lowerHandle.userInteractionEnabled = NO;
 
     // Layoput the upper handle
     self.upperHandle.frame = [self thumbRectForValue:_upperValue image:self.upperHandleImageNormal];
     self.upperHandle.image = self.upperHandleHidden ? nil : self.upperHandleImageNormal;
     self.upperHandle.highlightedImage = self.upperHandleHidden ? nil : self.upperHandleImageHighlighted;
-    self.upperHandle.userInteractionEnabled = !self.upperHandleHidden;
+    self.upperHandle.userInteractionEnabled = NO;
 
 }
 
