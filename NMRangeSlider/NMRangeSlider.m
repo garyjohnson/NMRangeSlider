@@ -227,6 +227,12 @@ NSUInteger DeviceSystemMajorVersion() {
     [self setNeedsLayout];
 }
 
+- (void) setEnabled:(BOOL)enabled
+{
+    [super setEnabled:enabled];
+    [self setNeedsLayout];
+}
+
 //ON-Demand images. If the images are not set, then the default values are loaded.
 
 - (UIImage *)trackBackgroundImage
