@@ -101,7 +101,11 @@ NSUInteger DeviceSystemMajorVersion() {
     _upperHandleHidden = NO;
     _lowerHandleHidden = NO;
     
-    [self addSubviews];
+    if(_haveAddedSubviews==NO)
+    {
+        _haveAddedSubviews=YES;
+        [self addSubviews];
+    }
 }
 
 // ------------------------------------------------------------------------------------------------------
