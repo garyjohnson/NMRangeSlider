@@ -407,6 +407,9 @@ NSUInteger DeviceSystemMajorVersion() {
 //returns the rect for the track image between the lower and upper values based on the trackimage object
 - (CGRect)trackRect
 {
+    if(_lowerHandle.hidden && _upperHandle.hidden)
+        return CGRectMake(0,0,0,0);
+        
     CGRect retValue;
 
     retValue.size = CGSizeMake(_trackImage.size.width, _trackImage.size.height);
