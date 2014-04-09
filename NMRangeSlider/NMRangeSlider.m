@@ -407,7 +407,7 @@ NSUInteger DeviceSystemMajorVersion() {
 //returns the rect for the track image between the lower and upper values based on the trackimage object
 - (CGRect)trackRect
 {
-    if(_lowerHandle.hidden && _upperHandle.hidden)
+    if(!self.enabled)
         return CGRectMake(0,0,0,0);
         
     CGRect retValue;
@@ -544,14 +544,14 @@ NSUInteger DeviceSystemMajorVersion() {
 
     // Layout the lower handle
     self.lowerHandle.frame = [self thumbRectForValue:_lowerValue image:self.lowerHandleImageNormal];
-    self.lowerHandle.image = self.lowerHandleHidden ? nil : self.lowerHandleImageNormal;
-    self.lowerHandle.highlightedImage = self.lowerHandleHidden ? nil : self.lowerHandleImageHighlighted;
+    self.lowerHandle.image = self.lowerHandleHidden || !self.enabled ? nil : self.lowerHandleImageNormal;
+    self.lowerHandle.highlightedImage = self.lowerHandleHidden || !self.enabled ? nil : self.lowerHandleImageHighlighted;
     self.lowerHandle.userInteractionEnabled = NO;
 
     // Layoput the upper handle
     self.upperHandle.frame = [self thumbRectForValue:_upperValue image:self.upperHandleImageNormal];
-    self.upperHandle.image = self.upperHandleHidden ? nil : self.upperHandleImageNormal;
-    self.upperHandle.highlightedImage = self.upperHandleHidden ? nil : self.upperHandleImageHighlighted;
+    self.upperHandle.image = self.upperHandleHidden || !self.enabled ? nil : self.upperHandleImageNormal;
+    self.upperHandle.highlightedImage = self.upperHandleHidden || !self.enabled ? nil : self.upperHandleImageHighlighted;
     self.upperHandle.userInteractionEnabled = NO;
 
 }
