@@ -100,12 +100,6 @@ NSUInteger DeviceSystemMajorVersion() {
     _upperMinimumValue = NAN;
     _upperHandleHidden = NO;
     _lowerHandleHidden = NO;
-    
-    if(_haveAddedSubviews==NO)
-    {
-        _haveAddedSubviews=YES;
-        [self addSubviews];
-    }
 }
 
 // ------------------------------------------------------------------------------------------------------
@@ -534,6 +528,12 @@ NSUInteger DeviceSystemMajorVersion() {
 
 -(void)layoutSubviews
 {
+    if(_haveAddedSubviews==NO)
+    {
+        _haveAddedSubviews=YES;
+        [self addSubviews];
+    }
+    
     if(_lowerHandleHidden)
     {
         _lowerValue = _minimumValue;
